@@ -67,7 +67,6 @@ contract IntentExecutionHelper is IntentInterface, CCIPReceiver, Ownable {
                 break;
             }
         }
-        
         // Emit intent received event
         emit IntentReceived(
             intentId,
@@ -128,7 +127,14 @@ contract IntentExecutionHelper is IntentInterface, CCIPReceiver, Ownable {
         bool validIntent
     ) internal returns (uint256 amountOut, bool swapSuccess) {
         // If intent is valid and we have ETH from CCIP, perform swap
-        if (!validIntent || uniswapRouter == address(0) || weth == address(0) || ethAmount == 0 || ethAmount > intent.maxEthIn) {
+        if (!validIntent || uniswapRouter == address(0) || ethAmount == 0 || ethAmount > intent.maxEthIn) {
+            emit SwapExecuted(intentId, intent.memeToken, ethAmount, 0, false);
+            return (0, false);
+        }
+        
+        // Get WETH address from router (required for swapExactETHForTokens)
+        address routerWETH = IUniswapV2Router02(uniswapRouter).WETH();
+        if (routerWETH == address(0)) {
             emit SwapExecuted(intentId, intent.memeToken, ethAmount, 0, false);
             return (0, false);
         }
@@ -137,8 +143,9 @@ contract IntentExecutionHelper is IntentInterface, CCIPReceiver, Ownable {
         uint256 minAmountOut = intent.amountOut * (10000 - intent.maxSlippageBps) / 10000;
         
         // Build swap path: ETH -> WETH -> MEMEToken
+        // Note: swapExactETHForTokens requires path[0] to be Router's WETH address
         address[] memory path = new address[](2);
-        path[0] = weth;
+        path[0] = routerWETH;
         path[1] = intent.memeToken;
         
         // Execute swap via Uniswap router
