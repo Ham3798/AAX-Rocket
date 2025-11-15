@@ -2,6 +2,8 @@
 pragma solidity ^0.8.0;
 
 interface IUniswapV2Router02 {
+    function WETH() external pure returns (address);
+    
     function swapExactETHForTokens(
         uint amountOutMin,
         address[] calldata path,
@@ -27,7 +29,7 @@ interface IntentInterface {
 
     struct BuyIntent {
         uint64 chainselector;
-        address memeToken;   // => 런치패드가 내부인지 / 외부인지 
+        address memeToken; 
         uint256 amountOut;
         uint256 maxEthIn;
         uint256 maxSlippageBps;
