@@ -1,0 +1,13 @@
+.DS_Store
+node_modules/
+
+# Project-specific ignores
+pimlico-tutorial-1/.env
+pimlico-tutorial-1/node_modules/
+4337-meme-buyer/node_modules/
+ccip-faucet-fe/node_modules/
+ccip-faucet-contracts/node_modules/
+
+# Local env/config
+.env
+
