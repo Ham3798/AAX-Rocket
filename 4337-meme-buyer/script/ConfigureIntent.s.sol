@@ -79,7 +79,15 @@ contract ConfigureIntentHelper is Script {
         address gatewayAddr = vm.parseJsonAddress(gatewayJson, "$.contracts.intentGateway");
 
         vm.startBroadcast(helperPk);
-        IntentExecutionHelper(helperAddr).addSource(helperSelector, gatewayAddr);
+        IntentExecutionHelper helper = IntentExecutionHelper(helperAddr);
+        helper.addSource(helperSelector, gatewayAddr);
+        
+        // Set Uniswap Router if configured
+        if (vm.keyExists(helperJson, "$.uniswap.router")) {
+            address uniswapRouter = vm.parseJsonAddress(helperJson, "$.uniswap.router");
+            helper.setUniswapRouter(uniswapRouter);
+            console2.log("Uniswap Router set:", uniswapRouter);
+        }
         vm.stopBroadcast();
 
         console2.log("=== Intent Helper Configuration ===");

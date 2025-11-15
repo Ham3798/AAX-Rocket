@@ -7,10 +7,13 @@
     "chainName": "Monad Testnet"
   },
   "contracts": {
-    "intentGateway": "0x1a670A5D1320842e450aAC2fc4a75038765Da24d"
+    "intentGateway": "0xE7fa3Ef3674a5097240641C9968976E9985c9dDf"
   },
   "ccip": {
     "helperChain": "ethereum-sepolia"
+  },
+  "uniswap": {
+    "router": "0xfB8e1C3b833f9E67a71C859a132cf783b645e436"
   }
 }
 

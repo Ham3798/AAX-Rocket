@@ -5,7 +5,10 @@
     "chainSelector": 16015286601757825753
   },
   "contracts": {
-    "intentHelper": "0xBBFE759fd5425B1708E5426334F30Fbec74AA9df"
+    "intentHelper": "0x2fa8846aFDb0AE2E1A63548B20a82af087BC136d"
+  },
+  "uniswap": {
+    "router": "0xeE567Fe1712Faf6149d80dA1E6934E354124CfE3"
   }
 }
 
