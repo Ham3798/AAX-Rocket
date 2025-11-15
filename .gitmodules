@@ -1,0 +1,3 @@
+[submodule "4337-meme-buyer/lib/openzeppelin-contracts"]
+	path = 4337-meme-buyer/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
